@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
 export const BackgroundImage = styled.ImageBackground`
   flex: 1;
@@ -9,14 +9,16 @@ export const BackgroundImage = styled.ImageBackground`
 export const Container = styled.View``;
 
 export const Title = styled.Text`
-  font-style: normal;
-  font-weight: 600;
-  font-size: 40px;
-  line-height: 50px;
-  color: #fff;
-  margin-top: 80px;
-  width: 250px;
-  font-family: 'Poppins-Regular';
+  ${({ theme }) => css`
+    font-style: normal;
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 50px;
+    color: ${theme.colors.white};
+    margin-top: 80px;
+    width: 250px;
+    font-family: ${theme.fonts['Poppins-Regular']};
+  `}
 `;
 
 export const NavigationButton = styled.TouchableOpacity`
