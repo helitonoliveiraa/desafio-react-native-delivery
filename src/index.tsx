@@ -6,16 +6,20 @@ import 'intl/locale-data/jsonp/pt-BR';
 
 import Routes from './routes';
 
+import { AppThemeProvider } from './context/index';
+
 const App: React.FC = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <StatusBar
-        barStyle="light-content"
-        backgroundColor="transparent"
-        translucent
-      />
-      <Routes />
-    </View>
+    <AppThemeProvider>
+      <View style={{ flex: 1 }}>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+        />
+        <Routes />
+      </View>
+    </AppThemeProvider>
   );
 };
 

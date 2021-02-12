@@ -19,6 +19,7 @@
     "@testing-library/react-native": "^6.0.0",
     "axios": "^0.21.0",
     "intl": "^1.2.5",
+    "polished": "^4.1.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-gesture-handler": "^1.8.0",

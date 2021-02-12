@@ -1,4 +1,4 @@
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 import { FlatList } from 'react-native';
 
 interface Food {
@@ -10,23 +10,31 @@ interface Food {
   formattedPrice: string;
 }
 
+const defaultTexts = css`
+  ${({ theme }) => css`
+    font-family: ${theme.fonts['Poppins-Regular']};
+    font-style: normal;
+    color: ${theme.colors.titles};
+    font-weight: normal;
+  `}
+`;
+
 export const Container = styled.View`
   flex: 1;
-  background: #fff;
+  background: ${({ theme }) => theme.colors.white};
 `;
 
 export const Header = styled.View`
   padding: 60px 24px 60px;
-  background: #c72828;
+  background: ${({ theme }) => theme.colors.primary};
 
   display: flex;
   align-items: center;
 `;
 
 export const HeaderTitle = styled.Text`
-  color: #fff;
-  font-family: 'Poppins-Regular';
-  font-style: normal;
+  ${defaultTexts};
+  color: ${({ theme }) => theme.colors.white};
   font-weight: 600;
   font-size: 16px;
   line-height: 24px;
@@ -49,14 +57,14 @@ export const Food = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
 
-  background: #f0f0f5;
+  background: ${({ theme }) => theme.colors.background};
   border-radius: 8px;
 
   margin-bottom: 16px;
 `;
 
 export const FoodImageContainer = styled.View`
-  background: #ffb84d;
+  background: ${({ theme }) => theme.colors.secondary};
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   padding: 16px;
@@ -70,30 +78,22 @@ export const FoodContent = styled.View`
   padding: 16px;
 `;
 export const FoodTitle = styled.Text`
-  font-family: 'Poppins-Regular';
-  font-style: normal;
+  ${defaultTexts};
   font-weight: 600;
   font-size: 15px;
   line-height: 22px;
-
-  color: #3d3d4d;
 `;
 export const FoodDescription = styled.Text`
-  font-family: 'Poppins-Regular';
-  font-style: normal;
-  font-weight: normal;
+  ${defaultTexts};
   font-size: 10px;
   line-height: 16px;
 
   margin-top: 6px;
-
-  color: #3d3d4d;
 `;
 
 export const FoodPricing = styled.Text`
-  font-family: 'Poppins-Regular';
-  font-style: normal;
-  font-weight: normal;
+  ${defaultTexts};
+
   font-size: 18px;
   line-height: 21px;
 
@@ -101,5 +101,5 @@ export const FoodPricing = styled.Text`
 
   font-weight: 600;
 
-  color: #39b100;
+  color: ${({ theme }) => theme.colors.positive};
 `;
