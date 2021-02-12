@@ -5,14 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 
 import Icon from 'react-native-vector-icons/Feather';
 
-import {
-  Container,
-  BackgroundImage,
-  Title,
-  NavigationButton,
-  ButtonText,
-  IconContainer,
-} from './styles';
+import * as S from './styles';
 
 import Background from '../../assets/home-background.png';
 import Logo from '../../assets/logo.png';
@@ -27,24 +20,24 @@ const Home: React.FC = () => {
   }
 
   return (
-    <BackgroundImage
+    <S.BackgroundImage
       source={Background}
       imageStyle={{
         width: 313,
         height: 427,
       }}
     >
-      <Container>
+      <S.Container>
         <Image source={Logo} />
-        <Title>Uma verdadeira experiência Italiana.</Title>
-      </Container>
-      <NavigationButton onPress={() => handleNavigate()}>
-        <ButtonText>Entrar no Restaurant</ButtonText>
-        <IconContainer>
+        <S.Title>Uma verdadeira experiência Italiana.</S.Title>
+      </S.Container>
+      <S.NavigationButton onPress={() => handleNavigate()}>
+        <S.ButtonText>Entrar no Restaurant</S.ButtonText>
+        <S.IconContainer>
           <Icon name="log-in" size={24} color="#7A1818" />
-        </IconContainer>
-      </NavigationButton>
-    </BackgroundImage>
+        </S.IconContainer>
+      </S.NavigationButton>
+    </S.BackgroundImage>
   );
 };
 

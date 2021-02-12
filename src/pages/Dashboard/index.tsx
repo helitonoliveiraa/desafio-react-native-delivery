@@ -10,25 +10,7 @@ import api from '../../services/api';
 import formatValue from '../../utils/formatValue';
 import { useTheme } from '../../context/index';
 
-import {
-  Container,
-  Header,
-  ToggleButton,
-  FilterContainer,
-  Title,
-  CategoryContainer,
-  CategorySlider,
-  CategoryItem,
-  CategoryItemTitle,
-  FoodsContainer,
-  FoodList,
-  Food,
-  FoodImageContainer,
-  FoodContent,
-  FoodTitle,
-  FoodDescription,
-  FoodPricing,
-} from './styles';
+import * as S from './styles';
 
 interface Food {
   id: number;
@@ -97,28 +79,28 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <Container>
-      <Header>
+    <S.Container>
+      <S.Header>
         <Image source={Logo} />
-        <ToggleButton onPress={toggleTheme}>
+        <S.ToggleButton onPress={toggleTheme}>
           {currentTheme.title === 'light' ? (
-            <Icon name="sun" size={24} color="#FFB84D" />
+            <Icon name="sun" size={24} color={currentTheme.colors.secondary} />
           ) : (
-            <Icon name="moon" size={24} color="#FFB84D" />
+            <Icon name="moon" size={24} color={currentTheme.colors.texts} />
           )}
-        </ToggleButton>
-      </Header>
-      <FilterContainer>
+        </S.ToggleButton>
+      </S.Header>
+      <S.FilterContainer>
         <SearchInput
           value={searchValue}
           onChangeText={setSearchValue}
           placeholder="Qual comida você procura?"
         />
-      </FilterContainer>
+      </S.FilterContainer>
       <ScrollView>
-        <CategoryContainer>
-          <Title>Categorias</Title>
-          <CategorySlider
+        <S.CategoryContainer>
+          <S.Title>Categorias</S.Title>
+          <S.CategorySlider
             contentContainerStyle={{
               paddingHorizontal: 20,
             }}
@@ -126,7 +108,7 @@ const Dashboard: React.FC = () => {
             showsHorizontalScrollIndicator={false}
           >
             {categories.map(category => (
-              <CategoryItem
+              <S.CategoryItem
                 key={category.id}
                 isSelected={category.id === selectedCategory}
                 onPress={() => handleSelectCategory(category.id)}
@@ -137,42 +119,42 @@ const Dashboard: React.FC = () => {
                   style={{ width: 56, height: 56 }}
                   source={{ uri: category.image_url }}
                 />
-                <CategoryItemTitle
+                <S.CategoryItemTitle
                   isSelected={category.id === selectedCategory}
                 >
                   {category.title}
-                </CategoryItemTitle>
-              </CategoryItem>
+                </S.CategoryItemTitle>
+              </S.CategoryItem>
             ))}
-          </CategorySlider>
-        </CategoryContainer>
-        <FoodsContainer>
-          <Title>Pratos</Title>
-          <FoodList>
+          </S.CategorySlider>
+        </S.CategoryContainer>
+        <S.FoodsContainer>
+          <S.Title>Pratos</S.Title>
+          <S.FoodList>
             {foods.map(food => (
-              <Food
+              <S.Food
                 key={food.id}
                 onPress={() => handleNavigate(food.id)}
                 activeOpacity={0.6}
                 testID={`food-${food.id}`}
               >
-                <FoodImageContainer>
+                <S.FoodImageContainer>
                   <Image
                     style={{ width: 88, height: 88 }}
                     source={{ uri: food.thumbnail_url }}
                   />
-                </FoodImageContainer>
-                <FoodContent>
-                  <FoodTitle>{food.name}</FoodTitle>
-                  <FoodDescription>{food.description}</FoodDescription>
-                  <FoodPricing>{food.formattedPrice}</FoodPricing>
-                </FoodContent>
-              </Food>
+                </S.FoodImageContainer>
+                <S.FoodContent>
+                  <S.FoodTitle>{food.name}</S.FoodTitle>
+                  <S.FoodDescription>{food.description}</S.FoodDescription>
+                  <S.FoodPricing>{food.formattedPrice}</S.FoodPricing>
+                </S.FoodContent>
+              </S.Food>
             ))}
-          </FoodList>
-        </FoodsContainer>
+          </S.FoodList>
+        </S.FoodsContainer>
       </ScrollView>
-    </Container>
+    </S.Container>
   );
 };
 

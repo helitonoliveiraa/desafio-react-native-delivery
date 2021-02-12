@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components/native';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 const defaultTexts = css`
   ${({ theme }) => css`
@@ -26,6 +27,8 @@ export const Header = styled.View`
   display: flex;
   ${defaultFlex};
 `;
+
+export const LikeButton = styled(BorderlessButton)``;
 
 export const ScrollContainer = styled.ScrollView.attrs({
   contentContainerStyle: {

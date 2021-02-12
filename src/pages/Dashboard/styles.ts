@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 import { lighten } from 'polished';
-import { BorderlessButton } from 'react-native-gesture-handler';
+import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
 
 interface CategoryItemProps {
   isSelected?: boolean;
@@ -93,7 +93,7 @@ export const FoodList = styled.View`
   margin-top: 16px;
 `;
 
-export const Food = styled.TouchableOpacity`
+export const Food = styled(RectButton)`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -103,7 +103,7 @@ export const Food = styled.TouchableOpacity`
 `;
 
 export const FoodImageContainer = styled.View`
-  background: #ffb84d;
+  background: ${({ theme }) => theme.colors.secondary};
   border-top-left-radius: 8px;
   border-bottom-left-radius: 8px;
   padding: 16px;
