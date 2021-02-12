@@ -137,12 +137,12 @@ const FoodDetails: React.FC = () => {
     setFoodQuantity(foodQuantity - 1);
   }
 
-  const toggleFavorite = useCallback(async () => {
+  const toggleFavorite = useCallback(() => {
     // Toggle if food is favorite or not
     if (isFavorite) {
-      await api.delete(`/favorites/${food.id}`);
+      api.delete(`/favorites/${food.id}`);
     } else {
-      await api.post(`/favorites`, food);
+      api.post(`/favorites`, food);
     }
 
     setIsFavorite(!isFavorite);

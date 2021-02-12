@@ -14,6 +14,7 @@ export default {
     backgroundCard: '#f0f0f5',
     card: '#E4E4EB',
     inputs: '#B7B7CC',
+    textsCard: '#3D3D4D',
   },
 
   fonts: {
