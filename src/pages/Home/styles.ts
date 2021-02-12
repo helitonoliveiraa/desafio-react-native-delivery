@@ -1,3 +1,4 @@
+import { lighten, shade } from 'polished';
 import styled, { css } from 'styled-components/native';
 
 export const BackgroundImage = styled.ImageBackground`
@@ -22,7 +23,7 @@ export const Title = styled.Text`
 `;
 
 export const NavigationButton = styled.TouchableOpacity`
-  background: #ffb84d;
+  background: ${({ theme }) => theme.colors.secondary};
   border-radius: 8px;
   flex-direction: row;
   align-items: center;
@@ -32,13 +33,13 @@ export const ButtonText = styled.Text`
   font-weight: 600;
   font-size: 15px;
   line-height: 22px;
-  color: #7a1818;
+  color: ${({ theme }) => shade(0.4, theme.colors.negative)};
   flex: 1;
   text-align: center;
 `;
 
 export const IconContainer = styled.View`
-  background-color: #ffc46b;
+  background-color: ${({ theme }) => lighten(0.1, theme.colors.secondary)};
   padding: 16px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;

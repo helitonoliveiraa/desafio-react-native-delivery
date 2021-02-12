@@ -9,6 +9,7 @@ export default {
     positive: '#39B100',
     negative: '#C72828',
     white: '#FFFFFF',
+    background: '#f0f0f5',
     card: '#E4E4EB',
     inputs: '#B7B7CC',
   },

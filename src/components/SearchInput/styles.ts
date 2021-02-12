@@ -6,28 +6,28 @@ interface ContainerProps {
 }
 
 export const Container = styled.View<ContainerProps>`
-  width: 100%;
-  height: 60px;
-  padding: 0 16px;
-  background: #f0f0f5;
-  border-radius: 10px;
-  border-width: 2px;
-  border-color: #f0f0f5;
-  flex-direction: row;
-  align-items: center;
-
-  ${props =>
-    props.isFocused &&
-    css`
-      border-color: #c72828;
-    `}
+  ${({ theme, isFocused }) => css`
+    width: 100%;
+    height: 60px;
+    padding: 0 16px;
+    background: ${theme.colors.background};
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: ${isFocused
+      ? theme.colors.negative
+      : theme.colors.background};
+    flex-direction: row;
+    align-items: center;
+  `}
 `;
 
 export const TextInput = styled.TextInput`
-  flex: 1;
-  color: #6c6c80;
-  font-size: 16px;
-  font-family: 'Poppins-Regular';
+  ${({ theme }) => css`
+    flex: 1;
+    color: ${theme.colors.texts};
+    font-size: 16px;
+    font-family: ${theme.fonts['Poppins-Regular']};
+  `}
 `;
 
 export const Icon = styled(FeatherIcon)`
