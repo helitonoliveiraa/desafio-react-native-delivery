@@ -8,10 +8,12 @@ import SearchInput from '../../components/SearchInput';
 
 import api from '../../services/api';
 import formatValue from '../../utils/formatValue';
+import { useTheme } from '../../context/index';
 
 import {
   Container,
   Header,
+  ToggleButton,
   FilterContainer,
   Title,
   CategoryContainer,
@@ -44,6 +46,8 @@ interface Category {
 }
 
 const Dashboard: React.FC = () => {
+  const { toggleTheme, currentTheme } = useTheme();
+
   const [foods, setFoods] = useState<Food[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<
@@ -96,12 +100,13 @@ const Dashboard: React.FC = () => {
     <Container>
       <Header>
         <Image source={Logo} />
-        <Icon
-          name="log-out"
-          size={24}
-          color="#FFB84D"
-          onPress={() => navigation.navigate('Home')}
-        />
+        <ToggleButton onPress={toggleTheme}>
+          {currentTheme.title === 'light' ? (
+            <Icon name="sun" size={24} color="#FFB84D" />
+          ) : (
+            <Icon name="moon" size={24} color="#FFB84D" />
+          )}
+        </ToggleButton>
       </Header>
       <FilterContainer>
         <SearchInput

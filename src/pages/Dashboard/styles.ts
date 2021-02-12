@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components/native';
 import { lighten } from 'polished';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 interface CategoryItemProps {
   isSelected?: boolean;
@@ -7,7 +8,7 @@ interface CategoryItemProps {
 
 export const Container = styled.View`
   flex: 1;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
@@ -18,6 +19,8 @@ export const Header = styled.View`
   align-items: center;
   justify-content: space-between;
 `;
+
+export const ToggleButton = styled(BorderlessButton)``;
 
 export const FilterContainer = styled.View`
   padding: 0 24px;
@@ -51,9 +54,9 @@ export const CategorySlider = styled.ScrollView`
 
 export const CategoryItem = styled.TouchableOpacity<CategoryItemProps>`
   ${({ theme, isSelected }) => css`
-    background-color: ${theme.colors.background};
+    background-color: ${theme.colors.backgroundCard};
     border: 2px;
-    border-color: ${theme.colors.background};
+    border-color: ${theme.colors.backgroundCard};
     height: 120px;
     width: 120px;
     border-radius: 8px;
@@ -93,7 +96,7 @@ export const Food = styled.TouchableOpacity`
   display: flex;
   flex-direction: row;
   align-items: center;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.backgroundCard};
   border-radius: 8px;
   margin-bottom: 16px;
 `;

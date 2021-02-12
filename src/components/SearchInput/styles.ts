@@ -10,12 +10,12 @@ export const Container = styled.View<ContainerProps>`
     width: 100%;
     height: 60px;
     padding: 0 16px;
-    background: ${theme.colors.background};
+    background: ${theme.colors.backgroundCard};
     border-radius: 10px;
     border-width: 2px;
     border-color: ${isFocused
       ? theme.colors.negative
-      : theme.colors.background};
+      : theme.colors.backgroundCard};
     flex-direction: row;
     align-items: center;
   `}

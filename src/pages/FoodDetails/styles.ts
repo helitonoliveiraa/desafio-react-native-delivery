@@ -17,7 +17,7 @@ const defaultFlex = css`
 
 export const Container = styled.View`
   flex: 1;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`

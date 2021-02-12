@@ -21,7 +21,7 @@ const defaultTexts = css`
 
 export const Container = styled.View`
   flex: 1;
-  background: ${({ theme }) => theme.colors.white};
+  background: ${({ theme }) => theme.colors.background};
 `;
 
 export const Header = styled.View`
@@ -57,7 +57,7 @@ export const Food = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
 
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.backgroundCard};
   border-radius: 8px;
 
   margin-bottom: 16px;
