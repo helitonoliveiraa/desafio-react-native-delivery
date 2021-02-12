@@ -74,9 +74,10 @@ export const CategoryItem = styled.TouchableOpacity<CategoryItemProps>`
   `}
 `;
 
-export const CategoryItemTitle = styled.Text`
+export const CategoryItemTitle = styled.Text<CategoryItemProps>`
   font-style: normal;
-  color: ${({ theme }) => theme.colors.texts};
+  color: ${({ theme, isSelected }) =>
+    isSelected ? theme.colors.textsCard : theme.colors.texts};
   font-weight: bold;
   font-size: 15px;
   line-height: 15px;
