@@ -15,6 +15,9 @@ export default {
     card: '#E4E4EB',
     inputs: '#B7B7CC',
     textsCard: '#3D3D4D',
+
+    shimmerColorWrite: '#ebebeb',
+    shimmerColorGray: '#c5c5c5',
   },
 
   fonts: {

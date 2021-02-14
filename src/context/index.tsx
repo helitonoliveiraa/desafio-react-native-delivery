@@ -1,5 +1,12 @@
-import React, { createContext, useCallback, useContext, useState } from 'react';
+import React, {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import { ThemeProvider } from 'styled-components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import { light, dark } from '../styles/themes';
 
@@ -11,10 +18,31 @@ interface Theme {
 const ThemeContext = createContext({} as Theme);
 
 export const AppThemeProvider: React.FC = ({ children }) => {
-  const [theme, setTheme] = useState(dark);
+  const [theme, setTheme] = useState(light);
 
-  const toggleTheme = useCallback(() => {
+  useEffect(() => {
+    async function loadTheme(): Promise<void> {
+      const storagedTheme = await AsyncStorage.getItem('@theme:');
+
+      if (storagedTheme) {
+        setTheme(JSON.parse(storagedTheme));
+        return;
+      }
+
+      setTheme(light);
+    }
+
+    loadTheme();
+  }, []);
+
+  const toggleTheme = useCallback(async () => {
     setTheme(theme.title === 'light' ? dark : light);
+
+    if (theme.title === 'light') {
+      await AsyncStorage.setItem('@theme:', JSON.stringify(dark));
+    } else {
+      await AsyncStorage.setItem('@theme:', JSON.stringify(light));
+    }
   }, [theme]);
 
   const currentTheme = theme;
