@@ -45,7 +45,7 @@ export const FoodsContainer = styled.View`
 export const Food = styled.View`
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.backgroundCard};
   border-radius: 8px;
   margin-bottom: 16px;
 `;
@@ -55,6 +55,7 @@ export const FoodImageContainer = styled.View`
   overflow: hidden;
   border-top-right-radius: 8px;
   border-top-left-radius: 8px;
+  align-items: center;
 `;
 
 export const FoodContent = styled.View`
@@ -97,7 +98,7 @@ export const AdditionalsContainer = styled.View`
 `;
 
 export const AdittionalItem = styled.View`
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.backgroundCard};
   border-radius: 8px;
   padding: 10px 15px;
   margin-top: 8px;
@@ -139,7 +140,7 @@ export const QuantityContainer = styled.View`
   ${defaultFlex};
   align-items: center;
   width: 105px;
-  background: ${({ theme }) => theme.colors.background};
+  background: ${({ theme }) => theme.colors.backgroundCard};
   border-radius: 8px;
   padding: 10px 15px;
   margin-top: 25px;
