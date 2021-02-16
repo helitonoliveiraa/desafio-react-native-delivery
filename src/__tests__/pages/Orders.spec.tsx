@@ -3,6 +3,7 @@ import React from 'react';
 import { render, wait } from '@testing-library/react-native';
 import AxiosMock from 'axios-mock-adapter';
 import api from '../../services/api';
+import { AppThemeProvider } from '../../context/index';
 
 import Orders from '../../pages/Orders';
 
@@ -69,7 +70,11 @@ describe('Orders', () => {
 
     apiMock.onGet('/orders').reply(200, items);
 
-    const { getByText } = render(<Orders />);
+    const { getByText } = render(
+      <AppThemeProvider>
+        <Orders />
+      </AppThemeProvider>,
+    );
 
     await wait(() => expect(getByText('Ao molho')).toBeTruthy(), {
       timeout: 200,

@@ -5,6 +5,7 @@ import AxiosMock from 'axios-mock-adapter';
 import api from '../../services/api';
 
 import Dashboard from '../../pages/Dashboard';
+import { AppThemeProvider } from '../../context/index';
 
 const mockedNavigate = jest.fn();
 
@@ -86,7 +87,11 @@ describe('Dashboard', () => {
 
     apiMock.onGet('/foods?name_like=').reply(200, items);
 
-    const { getByText } = render(<Dashboard />);
+    const { getByText } = render(
+      <AppThemeProvider>
+        <Dashboard />
+      </AppThemeProvider>,
+    );
 
     await wait(() => expect(getByText('Ao molho')).toBeTruthy(), {
       timeout: 200,
@@ -235,7 +240,11 @@ describe('Dashboard', () => {
 
     apiMock.onGet('/categories').reply(200, categories);
 
-    const { getByText, queryByText, getByTestId } = render(<Dashboard />);
+    const { getByText, queryByText, getByTestId } = render(
+      <AppThemeProvider>
+        <Dashboard />
+      </AppThemeProvider>,
+    );
 
     await wait(() => expect(getByText('Massas')).toBeTruthy(), {
       timeout: 200,
@@ -401,7 +410,9 @@ describe('Dashboard', () => {
     apiMock.onGet('/categories').reply(200, categories);
 
     const { getByText, queryByText, getByTestId, debug } = render(
-      <Dashboard />,
+      <AppThemeProvider>
+        <Dashboard />
+      </AppThemeProvider>,
     );
 
     await wait(() => expect(getByText('Massas')).toBeTruthy(), {
@@ -507,7 +518,11 @@ describe('Dashboard', () => {
 
     apiMock.onGet('/foods?name_like=').reply(200, items);
 
-    const { getByText, getByTestId } = render(<Dashboard />);
+    const { getByText, getByTestId } = render(
+      <AppThemeProvider>
+        <Dashboard />
+      </AppThemeProvider>,
+    );
 
     await wait(() => expect(getByText('Ao molho')).toBeTruthy(), {
       timeout: 200,
