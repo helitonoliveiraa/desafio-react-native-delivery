@@ -5,11 +5,13 @@ import React, {
   useMemo,
   useLayoutEffect,
 } from 'react';
-import { Image } from 'react-native';
+import { Alert, Image } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Feather';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import LinearGradient from 'react-native-linear-gradient';
+import { createShimmerPlaceholder } from 'react-native-shimmer-placeholder';
 
 import formatValue from '../../utils/formatValue';
 import { useTheme } from '../../context/index';
@@ -17,6 +19,8 @@ import { useTheme } from '../../context/index';
 import api from '../../services/api';
 
 import * as S from './styles';
+
+const ShimmerPlaceholder = createShimmerPlaceholder(LinearGradient);
 
 interface Params {
   id: number;
@@ -42,6 +46,7 @@ interface Food {
 const FoodDetails: React.FC = () => {
   const { currentTheme } = useTheme();
 
+  const [isFoodVisible, setIsFoodVisible] = useState(false);
   const [food, setFood] = useState({} as Food);
   const [extras, setExtras] = useState<Extra[]>([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -68,6 +73,10 @@ const FoodDetails: React.FC = () => {
 
       setFood(formattedData);
       setExtras(extraData);
+
+      setTimeout(() => {
+        setIsFoodVisible(true);
+      }, 2000);
     }
 
     loadFood();
@@ -114,11 +123,11 @@ const FoodDetails: React.FC = () => {
   }
 
   const toggleFavorite = useCallback(() => {
-    if (isFavorite) {
-      api.delete(`/favorites/${food.id}`);
-    } else {
-      api.post(`/favorites`, food);
-    }
+    // if (isFavorite) {
+    //   api.delete(`/favorites/${food.id}`);
+    // } else {
+    //   api.post('/favorites', food);
+    // }
 
     setIsFavorite(!isFavorite);
   }, [isFavorite, food]);
@@ -143,13 +152,12 @@ const FoodDetails: React.FC = () => {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <S.LikeButton onPress={() => toggleFavorite()}>
-          <MaterialIcon
-            name={favoriteIconName}
-            size={24}
-            color={currentTheme.colors.secondary}
-          />
-        </S.LikeButton>
+        <MaterialIcon
+          name={favoriteIconName}
+          size={24}
+          color={currentTheme.colors.secondary}
+          onPress={() => toggleFavorite()}
+        />
       ),
     });
   }, [navigation, favoriteIconName, toggleFavorite, currentTheme]);
@@ -162,17 +170,39 @@ const FoodDetails: React.FC = () => {
         <S.FoodsContainer>
           <S.Food>
             <S.FoodImageContainer>
-              <Image
-                style={{ width: 327, height: 183 }}
-                source={{
-                  uri: food.image_url,
-                }}
-              />
+              <ShimmerPlaceholder
+                style={{ width: '100%', height: 183 }}
+                visible={isFoodVisible}
+              >
+                <Image
+                  style={{ width: 327, height: 183, alignItems: 'center' }}
+                  source={{
+                    uri: food.image_url,
+                  }}
+                />
+              </ShimmerPlaceholder>
             </S.FoodImageContainer>
             <S.FoodContent>
-              <S.FoodTitle>{food.name}</S.FoodTitle>
-              <S.FoodDescription>{food.description}</S.FoodDescription>
-              <S.FoodPricing>{food.formattedPrice}</S.FoodPricing>
+              <ShimmerPlaceholder
+                style={{ width: 200 }}
+                visible={isFoodVisible}
+              >
+                <S.FoodTitle>{food.name}</S.FoodTitle>
+              </ShimmerPlaceholder>
+
+              <ShimmerPlaceholder
+                style={{ width: '100%', marginTop: 2 }}
+                visible={isFoodVisible}
+              >
+                <S.FoodDescription>{food.description}</S.FoodDescription>
+              </ShimmerPlaceholder>
+
+              <ShimmerPlaceholder
+                style={{ width: 100, marginTop: 2 }}
+                visible={isFoodVisible}
+              >
+                <S.FoodPricing>{food.formattedPrice}</S.FoodPricing>
+              </ShimmerPlaceholder>
             </S.FoodContent>
           </S.Food>
         </S.FoodsContainer>
@@ -180,7 +210,12 @@ const FoodDetails: React.FC = () => {
           <S.Title>Adicionais</S.Title>
           {extras.map(extra => (
             <S.AdittionalItem key={extra.id}>
-              <S.AdittionalItemText>{extra.name}</S.AdittionalItemText>
+              <ShimmerPlaceholder
+                style={{ width: 150 }}
+                visible={isFoodVisible}
+              >
+                <S.AdittionalItemText>{extra.name}</S.AdittionalItemText>
+              </ShimmerPlaceholder>
               <S.AdittionalQuantity>
                 <Icon
                   size={15}
@@ -206,7 +241,9 @@ const FoodDetails: React.FC = () => {
         <S.TotalContainer>
           <S.Title>Total do pedido</S.Title>
           <S.PriceButtonContainer>
-            <S.TotalPrice testID="cart-total">{cartTotal}</S.TotalPrice>
+            <ShimmerPlaceholder style={{ width: 150 }} visible={isFoodVisible}>
+              <S.TotalPrice testID="cart-total">{cartTotal}</S.TotalPrice>
+            </ShimmerPlaceholder>
             <S.QuantityContainer>
               <Icon
                 size={15}
@@ -229,7 +266,11 @@ const FoodDetails: React.FC = () => {
           </S.PriceButtonContainer>
 
           <S.FinishOrderButton onPress={() => handleFinishOrder()}>
-            <S.ButtonText>Confirmar pedido</S.ButtonText>
+            <S.ButtonText
+              onPress={() => Alert.alert('Pedido realizado com sucesso!')}
+            >
+              Confirmar pedido
+            </S.ButtonText>
             <S.IconContainer>
               <Icon
                 name="check-square"
